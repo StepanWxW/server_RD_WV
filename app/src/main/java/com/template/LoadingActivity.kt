@@ -45,16 +45,16 @@ class LoadingActivity : AppCompatActivity() {
 
         if(checkedSavedLink()){
             startMainActivity()
+        } else {
+
+            val linkRef = initializationSDK()
+
+            if (isInternetAvailable()) {
+                listenerDB(linkRef)
+            } else {
+                startMainActivity()
+            }
         }
-
-        val linkRef = initializationSDK()
-
-        if(isInternetAvailable()) {
-            listenerDB(linkRef)
-        } else{
-            startMainActivity()
-        }
-
 
     }
 
@@ -133,7 +133,7 @@ class LoadingActivity : AppCompatActivity() {
         val client = OkHttpClient()
 
         val userAgent = getUserAgent(this)
-
+//        val completeUrl2 = "https://http://ksdhfksdhjf.ru/"
         val request = Request.Builder()
             .url(completeUrl)
             .header("User-Agent", userAgent)
